@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>World of Qizizz</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;900&display=swap" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background-color: #aa7efc;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    /* Стили для панели меню */
+    .topMenu {
+      height: 0;
+      width: 100%;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      background-color: #b98deb;
+      overflow-y: hidden;
+      transition: height 0.5s ease, padding 0.5s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .topMenu.open {
+      height: 150px;
+      padding: 20px 0;
+    }
+
+    .topMenu .main-menu {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 23px;
+      justify-content: center;
+    }
+
+    .topMenu a {
+      text-align: center;
+      text-decoration: none;
+      color: #fff;
+      font-size: 20px;
+      text-transform: uppercase;
+      font-weight: 900;
+      background: #b98deb;
+      border-radius: 5px;
+      transition: 0.3s;
+    }
+
+    .topMenu a:hover {
+      color: #f1f1f1;
+      background: #272424;
+    }
+
+    /* Кнопка для открытия и закрытия меню */
+    .toggle-btn {
+      font-size: 24px;
+      cursor: pointer;
+      color: #fff;
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      z-index: 2;
+    }
+
+    #content-area {
+      transition: margin-top 0.5s;
+      padding: 16px;
+      text-align: center;
+      max-width: 800px;
+      margin: 100px auto 20px auto;
+      background: #b98deb;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      color: #ffffff;
+    }
+
+
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      justify-content: center;
+      margin-top: 20px; /* Отступ после контента */
+      color: #ffffff;
+    }
+
+    .card {
+      position: relative;
+      width: 300px;
+      height: 400px;
+      background: #b98deb;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+      transition: transform 0.3s ease-in-out;
+    }
+    
+    .card:hover {
+      transform: translateY(-10px);
+    }
+
+    .image-slider {
+      width: 100%;
+      height: 70%;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .images {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .images img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 15px;
+      text-align: center;
+    }
+
+    .card h3 {
+      font-size: 20px;
+      margin-top: 0;
+    }
+
+    .card p {
+      font-size: 16px;
+      color: #555;
+      color: #ffffff;
+    }
+
+    .navigation-buttons {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+    }
+
+    .nav-btn {
+      background-color: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .nav-btn:hover {
+      background-color: #000;
+    }
+    .footer {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      z-index: 10;
+    }
+
+    .footer img {
+      width: 90px; /* Размер логотипа */
+      height: auto;
+    }
+    .images img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+  }
+
+  .images img:hover {
+    transform: scale(1.03);
+  }
+
+  </style>
+</head>
+<body>
+  <!-- Кнопка открытия меню -->
+  <span class="toggle-btn" id="menu-toggle" onclick="toggleNav()">☰ ОТКРЫТЬ МЕНЮ</span>
+  <!-- Меню -->
+  <div class="topMenu" id="top-menu">
+    <div class="main-menu">
+      <a href="glava.html"><i class="fa fa-home"></i> Главная</a>
+      <a href="users.html"><i class="fa fa-globe"></i> О нас</a>
+      <a href="tests.html"><i class="fa fa-file-alt"></i> Тесты</a>
+      <a href="quizzes.html"><i class="fa fa-play"></i> Сыграть</a>
+      <a href="profile.html"><i class="fa fa-user"></i> Профиль</a>
+    </div>
+  </div>
+  <!-- Основной контент -->
+  <div id="content-area"> 
+    <h1>Добро пожаловать на наш сайт!</h1>
+    <p>Здесь вы сможете создавать собственные тесты и проверять свои знания и знания других.</p>
+      <h2 style="color: #ffffff;">Возможности нашего приложения</h2>
+
+  </div>
+  <!-- Раздел с возможностями приложения -->
+<div id="features" style="margin-top: 40px; text-align: center;">
+  <div class="card-container">
+    <div class="card">
+      <div class="image-slider">
+        <div class="images">
+          <img src="../foto/Снимок экрана (28).png" alt="Меню">
+          <img src="../foto/Снимок экрана (29).png" alt="Тест">
+
+        </div>
+        <div class="navigation-buttons">
+          <button class="nav-btn prev-btn">&#9664;</button>
+          <button class="nav-btn next-btn">&#9654;</button>
+        </div>
+      </div>
+      <div class="card-content">
+        <h3>Меню и Тесты</h3>
+        <p>Удобный интерфейс для запуска и прохождения тестов.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="image-slider">
+        <div class="images">
+          <img src="../foto/Снимок экрана (31).png" alt="Результаты">
+          <img src="../foto/Снимок экрана (32).png" alt="Поделиться">
+        </div>
+        <div class="navigation-buttons">
+          <button class="nav-btn prev-btn">&#9664;</button>
+          <button class="nav-btn next-btn">&#9654;</button>
+        </div>
+      </div>
+      <div class="card-content">
+        <h3>Результаты и Поделиться</h3>
+        <p>Показываем подробные итоги, можно отправить ссылку.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="footer">
+    <img src="../foto/logo.svg" alt="Логотип">
+  </div>
+  <script>
+  function toggleNav() {
+    const menu = document.getElementById("top-menu");
+    const toggleButton = document.getElementById("menu-toggle");
+
+    if (menu.classList.contains("open")) {
+      menu.classList.remove("open");
+      toggleButton.innerHTML = "☰ ОТКРЫТЬ МЕНЮ";
+    } else {
+      menu.classList.add("open");
+      toggleButton.innerHTML = "☰ ЗАКРЫТЬ МЕНЮ";
+    }
+  }
+
+  document.querySelectorAll('.card').forEach(card => {
+  // Получаем контейнер с изображениями
+  const images = card.querySelector('.images');
+  const totalImages = images ? images.children.length : 0;
+  let currentIndex = 0;
+
+  // Проверяем наличие кнопок навигации
+  const prevBtn = card.querySelector('.prev-btn');
+  const nextBtn = card.querySelector('.next-btn');
+
+  // Убедитесь, что элементы существуют
+  if (images && prevBtn && nextBtn && totalImages > 0) {
+    prevBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+      images.style.transform = `translateX(-${currentIndex * 100}%)`;
+    });
+
+    nextBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % totalImages;
+      images.style.transform = `translateX(-${currentIndex * 100}%)`;
+    });
+  } else {
+    console.warn('Недостаточно элементов для работы слайдера в карточке:', card);
+  }
+});
+
+  </script>
+</body>
+</html>
